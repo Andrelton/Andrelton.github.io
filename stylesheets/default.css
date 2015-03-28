@@ -42,6 +42,20 @@ a {
   background-color: blueviolet;
 }
 
+#footer {
+  background-color: dimgrey;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+  height: 2em;
+  width: 50%;
+  text-align: center;
+  padding-top: 0.5em;
+  color: white;
+}
+
 
 #nav1:hover {
   color: black;
