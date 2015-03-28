@@ -1,0 +1,70 @@
+a {
+  text-decoration: none;
+}
+
+.bar {
+  top: 0.3em;
+  position: absolute;
+  width: 70%;
+  text-align: right;
+  font-size: 9em;
+}
+
+
+.nav {
+  position: relative;
+  height: 1em;
+  width: 25%;
+  margin-left: auto;
+  color: white;
+  text-align: right;
+  padding: 10px;
+  font-size: 1.5em;
+}
+
+#nav1 {
+  background-color: deepskyblue;
+}
+
+#nav2 {
+  background-color: chartreuse;
+}
+
+#nav3 {
+  background-color: gold;
+}
+
+#nav4 {
+  background-color: deeppink;
+}
+
+#nav5 {
+  background-color: blueviolet;
+}
+
+
+#nav1:hover {
+  color: black;
+  background-color: yellow;
+}
+
+#nav2:hover {
+  color: black;
+  background-color: yellow;
+}
+
+#nav3:hover {
+  color: black;
+  background-color: yellow;
+}
+
+#nav4:hover {
+  color: black;
+  background-color: yellow;
+}
+
+#nav5:hover {
+  color: black;
+  background-color: yellow;
+}
+
