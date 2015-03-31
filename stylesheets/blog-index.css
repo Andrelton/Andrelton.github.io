@@ -71,15 +71,15 @@ a {
 
 
 #footer {
-    padding-top: 0.5em;
-    text-align: center;
-    position: fixed;
-    width: 50%;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    color: white;
-    background-color: grey;
-    height: 1.5em;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  position: fixed;
+  width: 50%;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
 }
