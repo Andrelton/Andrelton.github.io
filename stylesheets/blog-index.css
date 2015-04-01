@@ -2,6 +2,7 @@ body {
     width: 70%;
     margin-right: auto;
     margin-left: auto;
+    font-family: Helvetica, sans-serif;
 }
 
 a {
@@ -12,6 +13,7 @@ a {
     font-size: 4em;
     line-height: 75%;
     margin-top: 0.5em;
+    font-family: Times;
 }
 
 #grey {
@@ -27,7 +29,7 @@ a {
     display: inline-block;
     margin-top: 1em;
     margin-left: 1.3em;
- 
+
 }
 
 .nav a {
