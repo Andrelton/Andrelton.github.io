@@ -7,6 +7,10 @@ h1 {
     font-family: Times;
 }
 
+.center {
+    text-align: center;
+}
+
 
 h4 span {
     color: grey;
@@ -24,4 +28,14 @@ section {
 img {
     margin-left: auto;
     margin-right: auto;
+}
+
+.code {
+    font-family: Courier;
+    margin-left: 5%;
+}
+
+.quote {
+    margin-left: 5%;
+    margin-right: 5%;
 }
