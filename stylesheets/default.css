@@ -23,7 +23,7 @@ a {
   color: crimson;
 }
 
-#side a {
+.side a {
   color: black;
 }
 
@@ -82,16 +82,22 @@ a {
   margin-bottom: 0.5em;
 }
 
-#side a:hover {
+.side a:hover {
   color: crimson;
 }
 
-#side {
+.side {
     background-color: #DCDCDC;
     width: 23%;
     text-align: right;
     padding: 1%;
     padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+#avatar {
+  padding: 0px;
+  width: 25%;
 }
 
 img {
