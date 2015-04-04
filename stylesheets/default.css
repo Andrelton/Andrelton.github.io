@@ -16,6 +16,11 @@ img {
   margin: auto;
 }
 
+#signature {
+  margin-left: 0;
+  width: 9em;
+}
+
 a {
   text-decoration: none;
   color: crimson;
@@ -57,6 +62,7 @@ a:hover {
   padding-left: 4%;
   padding-right: 2%;
   right: 2%;
+  font-weight: bold;
 }
 
 #words span {
@@ -75,9 +81,9 @@ a:hover {
 }
 
 #main {
-    width: 69%;
-    padding-right: 3%;
-    padding-left: 3%;
+    width: 71%;
+    padding-right: 2%;
+    padding-left: 2%;
     margin-top: 1em;
     margin-bottom: 4em;
 }
@@ -85,6 +91,7 @@ a:hover {
 #faux {
   display: block;
   font-size: 5em;
+  font-weight: bold;
   margin-bottom: 0.5em;
 }
 
