@@ -1,10 +1,12 @@
 h1 {
+    margin-top: 0;
     padding-left: 5%;
     padding-top: 1em;
+    padding-bottom: 0.25em;
     color: white;
-    background-color: darkslateblue;
-    font-weight: normal;
-    font-family: Times;
+    background-color: #0066CC;
+    font-weight: bold;
+    font-size: 4em;
 }
 
 .center {
