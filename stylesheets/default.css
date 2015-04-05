@@ -97,6 +97,7 @@ a:hover {
 
 .side a:hover {
   color: crimson;
+  background-color: orange;
 }
 
 .side {
