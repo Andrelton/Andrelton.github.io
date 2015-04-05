@@ -13,6 +13,14 @@ a {
     text-decoration: none;
 }
 
+#col1 a {
+    color: #D698FF;
+}
+
+#col1 a:hover {
+    color: #ADFF5C;
+}
+
 a:hover {
     color: orange;
 }
