@@ -8,21 +8,19 @@ body {
     font-weight: bold;
 }
 
-a {
+li a {
     color: white;
     text-decoration: none;
 }
 
-#col1 a {
-    color: #D698FF;
+a {
+    color: #C36AFF;
+    text-decoration: none;
 }
 
-#col1 a:hover {
-    color: #ADFF5C;
-}
 
 a:hover {
-    color: orange;
+    color: #FFA319;
 }
 
 li {
