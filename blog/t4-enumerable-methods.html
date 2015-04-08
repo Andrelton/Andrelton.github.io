@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Andrelton Invents "Blog"</title>
+    <link rel="stylesheet" href="../stylesheets/default.css">
+    <link rel="stylesheet" href="../stylesheets/blog-stylesheet.css">
+  </head>
+</body>
+    <main>
+      <h1><!-- Post Title -->fun with group_by
+        </h1>
+
+      <section>
+      <h4><!-- Subtitle -->Using Ruby's #group_by Method
+        <br><span><!-- Date -->Friday, April 10th, 2015
+          </span></h4>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      <p><!-- Content Below -->
+        I really don't mind reading the Ruby documentation. Actually, I secretly kind of like it. Living in Oakland, I spend a decent amount of time on the train, and I sometimes browse through the method pages. But of course, there's many, many methods I don't know about.
+      </p>
+
+      <p>
+        One method was from the Enumerable class, #group_by. The name <em>sort of</em> suggests what it does, and the documentation is pretty straight-forward: "Groups the collection by the result of the block." Ok, great! How can it be used? "Returns a hash where the keys are the evaluated result from the block and the values are arrays of elements in the collection that correspond to the key." Ok!... and, that's why there's examples. Here's the one from the <a href="http://ruby-doc.org/core-2.2.0/Enumerable.html#method-i-group_by">ruby-doc.org page</a>:
+
+        <p class="code">(1..6).group_by { |i| i % 3 }
+          <br>
+          <br>#=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}</p>
+
+        Wow, that's actually kind of cool! In this example, the method groups the items by their remainder when divided by three. I could think of some uses for something like that... though, the math examples may not be very interesting. Let's think of some better ones.
+      </p>
+
+      <p>
+        Let’s say I have a list of friends in an array (oh, I explored those <a href="t3-arrays-hashes.html">last week!</a>):
+      </p>
+
+      <p class="code">
+        friends = ["Sam", "Kevin", "Brian", "Steve", <br>"Pete", "Todd", "Frank", "Elliot", "George"]
+      </p>
+
+      <p>
+        I could look at them and think, “Wow, pretty generic-looking names. And whoa, lots are five letters long." How many? I could use the #group_by method like so, and it would return:
+      </p>
+
+      <p class="code">
+        friends.group_by { |friend| <strong>friend.length</strong> }
+        <br>
+        <br>{3=>["Sam"], 5=>["Kevin", "Brian", "Steve", "Frank"], <br>4=>["Pete", "Todd"], 6=>["Elliot", "George"]}
+      </p>
+
+      <p>
+        Not bad! We could also do this with hashes! Now let’s assume my nine friends make up a baseball team, and I have a hash with their names and their batting averages. (If you aren’t a baseball fan, I’m sorry. Just think of the numbers like percentages, and the higher, the better.)
+      </p>
+
+      <p class="code">
+        players = {
+          <br>"Pete" => 0.320,
+          <br>"Kevin" => 0.221,
+          <br>"Brian" => 0.212,
+          <br>"Steve" => 0.302,
+          <br>"Dylan" => 0.198,
+          <br>"Todd" => 0.244,
+          <br>"Frank" => 0.311,
+          <br>"Elliot" => 0.141,
+          <br>"George" => 0.267
+        <br>}
+      </p>
+
+      <p>
+        If I want to find which ones are batting over “.250” (baseball people leave off that zero…) I could use #group_by again, and get them sorted!
+      </p>
+
+      <p class="code">
+        players.group_by { |name, avg| <strong>avg > 0.25</strong> }
+        <br>
+        <br>{<strong>true</strong>=>[["Pete", 0.32], ["Steve", 0.302], ["Frank", 0.311], ["George", 0.267]], <strong>false</strong>=>[["Kevin", 0.221], ["Brian", 0.212], ["Dylan", 0.198], ["Todd", 0.244], ["Elliot", 0.141]]}
+      </p>
+
+      <p>
+        Awesome! (Well, the method is. The baseball team could use a few new players). Like with most things in object-oriented programming, the true challenge is just thinking how to translate a real-world idea into code. The language structure allows us to interact with countless representations of objects. We could alphebetize, group by color, or sort by birthday. Whatever the goal, if we can figure out a block of code to make it happen, we’re in business. Play around a bit and see if you can think of some good ones, and let me know. Happy grouping!
+      </p>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      </section>
+    </main>
+  </body>
+</html>
