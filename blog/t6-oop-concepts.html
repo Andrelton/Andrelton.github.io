@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Andrelton Invents "Blog"</title>
+    <link rel="stylesheet" href="../stylesheets/default.css">
+    <link rel="stylesheet" href="../stylesheets/blog-stylesheet.css">
+  </head>
+</body>
+    <main>
+      <h1><!-- Post Title -->proctice makes perfect
+        </h1>
+
+      <section>
+      <h4><!-- Subtitle -->Ruby Blocks, Procs, and Lambdas
+        <br><span><!-- Date -->Tuesday, April 21st, 2015
+          </span></h4>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      <p><!-- Content Below -->
+        Proc. Oh how I loathe you… until I finally understood you. I have approached my study of Ruby from many angles over the past few months: <em>Learning to Program, The Ruby Programming Language,</em> Team Treehouse, Codecademy, Ruby Monk, and many other internet resources. I made solid progress. Then I finally began <em>The Well-Grounded Rubyist</em>. It was the best guide I’d encountered, so I finally decided to learn with some structure: I would read the entire book, and not move past a topic until I completely understood it. In the past I’d seen procs and had decided to wait. They were described in countless different ways, none of them perfectly clear to me. Finally, it was time to tackle them, and I did. Here’s a summary.
+      </p>
+
+      <p>
+        As Rubyists, we’ve all seen this familiar form:
+      </p>
+
+      <p class="code">
+        [1, 2, 3].each { |num| puts num }
+      </p>
+
+      <p>
+        The part between the curly brackets? That’s a code block. Simple. <span>Array#each</span> passes each item to the code block, and the block does its work. And a block is everything that Ruby needs to make a <span>Proc</span>, so that’s simple too:
+      </p>
+
+      <p class="code">
+        p = Proc.new { puts “Hello World!” }
+      </p>
+
+      <p>
+        But after that, confusion comes easily . They say everything in Ruby is an object. So the code block in both examples is an object, right? Wrong. The array [1, 2, 3] is the object in the first, and <em>the proc itself</em> is the object in the second. In the first example, the code block is simply part of the syntax of <span>Array#each</span>.
+      </p>
+
+      <p>
+        In <em>The Well-Grounded Rubyist</em>, Mr. Black states that a proc is “an object whose job is to provide execution access to a previously-defined code block.” Thus, a proc allows us to encapsulate some code into an object and pass it around. So the proc is an object, but the code block alone is not.
+      </p>
+
+      <p>
+        To use the proc (from the second example), we simply call it, and it runs.
+      </p>
+
+      <p class="code">
+        p.call # => Hello World!
+      </p>
+
+      <p>
+        None of this is too difficult, really. Procs contain previously defined code. The blocks they contain can have arguments, like the first example. These are simple procs, but more complex structures can give the user a lot of power.
+      </p>
+
+      <p>
+        But why put the code in an object? Because it can then be used as an argument in another method. The structure for that use confused me at first, so I’ll take it slow.
+      </p>
+
+      <p class="code">
+        def example(q)
+        <br>&nbsp puts “Calling the proc”
+        <br>&nbsp q.call # => Hello World!
+        <br>end
+        <br>
+        <br>example(p)
+      </p>
+
+      <p>
+        If we were to write a method where a proc is expected, then it's just like anything we’ve seen before. We call the method, the argument that comes in can be called, and “Hello World!” is displayed again. But what if we don’t already have a proc object? Here is a syntax that may be seen more commonly, and it can be confusing.
+      </p>
+
+      <p class="code">
+        def example(&block)
+        <br>&nbsp block.class # => Proc
+        <br>&nbsp puts “Calling the block”
+        <br>&nbsp block.call
+        <br>end
+        <br>
+        <br>example { puts “Hello World!” }
+      </p>
+
+      <p>
+        Let’s pretend we’d never made the proc earlier. Here we present the method with a code block. The <span>&block</span> in the parameter list says that if a block is received, turn it into a proc, instead of binding arguments to it. Easy as that. But here’s where most resources make the topic confusing. They call "&block" an argument. <em>It is not</em>… at least in the traditional sense. If you use <span>Method#arity</span> or force an argument error by calling the method with any argument you’re used to using, you’ll see that #example has no parameters. <em>And that’s necessary.</em>
+      </p>
+
+      <p>
+        We want Ruby to run predictably across the board, and the same goes here: If we don’t present the method with a block, we of course don’t want an argument error. Blocks <em>should</em> be optional. Once I understood this, everything was much clearer. "&block" is not a parameter like we normally see them. It just allows us to use the block like a variable, and do <span>block.call</span> instead of <span>yield</span>. (“block” can be anything, it’s important to note. We could use “&cookies” and the world would keep spinning.)
+      </p>
+
+      <p>
+        If we wanted to use our previously defined “p” in this example, we also have to use the ampersand. So <span>example(&p)</span> would work too - - Again, because this is 0 for 0 for arguments (in error lingo) and the previous was 1 for 1.
+      </p>
+
+      <p>
+        So there you have it. Procs allow us to pass around code. <span>Proc.new</span> allows us to create a proc, or the “&” allows us to create one from a code block during a method call. Not too bad. Hopefully my slow journey toward understanding will help someone else, and we can all be better Rubyists together.
+      </p>
+
+      <p>
+        ...Oh, you were wondering about lambdas too? Fine. Yes you often seem them together, and many resources can make them just as confusing. Deep breath. This could take awhile. Here we go: a lambda is a specific form of a proc. They are more strict about receiving the expected number of arguments, and <a href="http://www.skorks.com/2010/05/ruby-procs-and-lambdas-and-the-difference-between-them/">they handle certain control flow words differently</a>. Exhale. Oh, that wasn’t so bad. Sure, there’s a <em>bit</em> more to it, but if you’re looking for that info, I promise you need a <em>much</em> more detailed guide than this page.  That was enough to help us sleep at night.
+      </p>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      </section>
+    </main>
+  </body>
+</html>

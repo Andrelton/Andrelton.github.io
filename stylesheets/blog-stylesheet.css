@@ -41,6 +41,11 @@ img {
     margin-left: 5%;
 }
 
+p span {
+    font-family: Courier;
+    background-color: #CDCCCF;
+}
+
 .quote {
     font-style: italic;
     margin-left: 5%;

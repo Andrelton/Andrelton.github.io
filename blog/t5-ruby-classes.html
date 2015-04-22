@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Andrelton Invents "Blog"</title>
+    <link rel="stylesheet" href="../stylesheets/default.css">
+    <link rel="stylesheet" href="../stylesheets/blog-stylesheet.css">
+  </head>
+</body>
+    <main>
+      <h1><!-- Post Title -->class is in session
+        </h1>
+
+      <section>
+      <h4><!-- Subtitle -->Exploring Classes in Ruby
+        <br><span><!-- Date -->Thursday, April 16th, 2015
+          </span></h4>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      <p><!-- Content Below -->
+        I’ve created a Monster! In Ruby, to illustrate classes. In <em>The Well-Grounded Rubyist</em>, David A. Black describes classes succinctly: “Defining a class lets you group behaviors (methods) into convenient bundles, so that you can quickly create many objects that behave essentially the same way.” Let’s do that.
+      </p>
+
+      <img src="../imgs/monster.png" />
+
+      <p>
+        We’ve defined a class called <span>Monster</span>. Now any object that we make of class “Monster” will have the characteristics and abilities described here. When we call <span>Monster.new</span>, the class "Monster" will create a new <em>instance</em> of the Monster class. When doing that, it calls the instance <em>method</em> <span>initialize</span>. This gives the new Monster its first traits. Here we pass in a name and a number of arms as the arguments to initialize. The method then sets those arguments to instance <em>variables</em> (denoted by the @ sign) that all instances of Monster will have.
+      </p>
+
+      <p>
+        You can see that <span>arms=4</span>. That is the default. When we call the method, if we don’t provide a <em>different</em> number of arms, the monster will have four arms. That makes it a better monster than one with two arms, right?
+      </p>
+
+      <p>
+        Next we can see the method <span>arms</span>. Instance variables have a local scope, so they can’t be viewed outside the class Monster. But this method returns the instance variable <span>@arms</span>, so that we could call the method outside the class, and see how many arms the monster has. Followed by "arms" we have <span>scream</span>. Screaming would be the first true “ability” that the monster has, and this one is quite simple; it just prints a scream. Last we have <span>flail</span>, which is only slightly more complicated. We use one of the instance’s variables in order to do something, which is in this case still quite simple, printing something a number of times, that being the number of arms the monster has. While simple, it illustrates the fact that instance variables can be used inside the class with other methods.
+      </p>
+
+      <p>
+        Now we’ll finally create a monster. We’ll call the variable <span>dave</span> even though we wouldn’t have to. It’s just for fun, we all want to enjoy this example. We could call it something plan like <span>monster1</span>. The monster gets it’s actual name by passing in a string when the class method <span>new</span> is called, here, “Dave”. As you can see, we don’t have to supply a number of arms; if we’re fine with four (as I am, I chose it as a great number!) it will default to four. Once the object is created, we could call <span>dave.arms</span> and see that the monster have four arms.
+      </p>
+
+      <p>
+        Here, we’ve called <span>dave.flail</span> to demonstrate the simple calculation involved in the method. It will print:
+      </p>
+
+        <p class="code">Flail!Flail!Flail!Flail!</p>
+
+      </p>
+        This is a very simple example of classes, but that’s for a reason. It demonstrates that the concept isn’t difficult, and that classes can be used very simply to model real-world concepts. Much, much more can be done with classes, and we’ll do more as we grow as Ruby programmers.
+      </p>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      </section>
+    </main>
+  </body>
+</html>
