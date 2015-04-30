@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Andrelton Invents "Blog"</title>
+    <link rel="stylesheet" href="../stylesheets/default.css">
+    <link rel="stylesheet" href="../stylesheets/blog-stylesheet.css">
+  </head>
+</body>
+    <main>
+      <h1><!-- Post Title -->again and again
+        </h1>
+
+      <section>
+      <h4><!-- Subtitle -->Comparing Loops in Ruby and Javascript
+        <br><span><!-- Date -->Thursday, April 30th, 2015
+          </span></h4>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      <p><!-- Content Below -->
+        When I first began studying Ruby, I was familiar with the <span>for</span> loop, as seen in languages like Java. So when I got to the Ruby section on looping, I was expecting more of what I’d already seen. Instead, I was first presented with a notation that I imagine Rubyists are happy to brag about:
+      </p>
+
+      <p class="code">
+        5.times do
+        <br>&nbsp puts “Good morning!”
+        <br>end
+      </p>
+
+      <p>
+        I was excited to see that there were options that were significantly more readable than those I had seen before, and I continued joyously on my journey, as I’d grown used to doing with Ruby.
+      </p>
+
+      <p>
+        In hindsight, now that I’ve learned more Ruby, and have begun learning JavaScript, I don’t see what I feared. The idea of the most general <span>while</span> loop is a necessary part of any programming language, and Ruby of course had it too. Once I realized its power, I quickly grew comfortable with the syntax and never looked back.
+      </p>
+
+      <p>
+        A <span>while</span> loop continues to run while a condition is true. In general, something within the loops effects that condition, eventually causing the loop to stop. Nearly the same loop can be run in both Ruby and JavaScript:
+      </p>
+
+      <p class="code">
+        idx = 0
+        <br>while (idx < 5) <em>[d]</em>
+        <br><em>&nbsp [print]</em>(idx)
+        <br>&nbsp idx += 1
+        <br><em>[d]</em>
+      </p>
+
+      <p class="code">
+        ([d] = delimiter)
+      </p>
+
+      <p>
+        Here, the loop is based on an index, which is incremented at the end of each loop. This loop will thus print 0 through 4, then stop, as the index will have reached 5.
+      </p>
+
+      <p>
+        Any condition can be used within the parentheses, but this one is so common that JavaScript uses a specific syntax for it: the <span>for</span> loop. Here is the same loop written in that style (I’ll use some specific JS syntax this time):
+      </p>
+
+      <p class="code">
+        for (var idx = 0; idx < 5; idx ++)
+        <br>&nbsp console.log(idx);
+      </p>
+
+      <p>
+        Many words can be used to describe the form, but it is essentially this: <span>for (<em>start; check; update</em>)</span>. The index begins at the value that it’s initialized to in the first portion, it stops as defined in the second portion, and it is updated as given in the final portion.
+      </p>
+
+      <p>
+        <em>The <span>for</span> loop in Ruby is NOT the same. It provides the syntax for iteration, and other methods are nearly always used in its place.</em>
+      </p>
+
+      <p>
+        Of course, "while" loops with specific conditions are great when the end point of a loop is known or can be easily imagined. When it is not known, an "ongoing" loop can be created:
+      </p>
+
+      <p class="code">
+        while (true) {
+        <br>&nbsp <em>[do something]</em>
+        <br>&nbsp break
+        <br>}
+      </p>
+
+      <p>
+        This would continue forever when simply testing “while true,” so an opportunity must be given to end the loop. Both Ruby and Javascript use <span>break</span>. It is generally used in conjunction with a conditional; essentially, “<em>break</em> if…” to end the loop as intended.
+      </p>
+
+      <p>
+        <em>Ruby can use this same same notation, or an even simpler alternative is available, just </em><span>loop</span>.
+      </p>
+
+      <p>
+        Instead of ending the loop, both languages also use a keyword that can send the program into the <em>following</em> loop at a given point. Javascript has <span>continue</span>, while Ruby uses <span>next</span> (Ruby also has a few other options). These words add more control, and along with the simple forms we’ve seen, looping provides a lot of power very simply.
+      </p>
+
+      <p>
+        Looking back, I’m not sure why the <span>for</span> loop had previously seemed foreign to me. There’s a lot going on between the parentheses for a beginner, but now that I’ve seen many loops, it feels like second nature, and it’s a very compact way to use the general form. Much of the Ruby language is very readable, but at times it provides even more options than are absolutely necessary (and some were skipped here). Used wisely, they can provide a lot of options, but most problems can be solved simply, implementing the standard <span>while</span> loop, or JavaScript’s shortened <span>for</span> form.
+      </p>
+
+      <a href="http://andrelton.github.io/blog">back to blog index</a>
+
+      </section>
+    </main>
+  </body>
+</html>
