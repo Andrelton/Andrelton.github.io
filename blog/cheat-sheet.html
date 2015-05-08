@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Eric's & Ellis's Fun Ruby Enumerable Methods Cheat Sheet</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/cheat-sheet.css">
+  </head>
+<body>
+    <main>
+      <h1>Eric's & Ellis's Fun Ruby Enumerable Cheat Sheet</h1>
+      <section>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Syntax</th>
+            <th>Result</th>
+          </tr>
+          <tr>
+            <td>#find</td>
+            <td>Returns the first item for which the block is not false.</td>
+            <td>[1, 2, 3, 4, 5].find { |item| item.even? }</td>
+            <td>#=> 2</td>
+          </tr>
+          <tr>
+            <td>#find_all</td>
+            <td>Returns an array of items for which the block is not false.</td>
+            <td>[1, 2, 3, 4, 5].find_all { |item| item.even? }</td>
+            <td>#=> [2, 4]</td>
+          </tr>
+          <tr>
+            <td>#reject</td>
+            <td>Return an array of all items for which the block return false.</td>
+            <td>[1, 2, 3, 4, 5].reject { |item| item.even? }</td>
+            <td>#=> [1, 3, 5]</td>
+          </tr>
+          <tr>
+            <td>#sort_by</td>
+            <td>Returns an array based on sorting by a given block.</td>
+            <td>[1, 2, 3, 4, 5].sort_by { |item| 20 - item }</td>
+            <td>#=> [5, 4, 3, 2, 1]</td>
+          </tr>
+          <tr>
+            <td>#min_by</td>
+            <td>Returns item that is the minimum value from a given block.</td>
+            <td>[1, 2, 3, 4, 5].sort_by { |item| 20 - item }</td>
+            <td>#=> 5</td>
+          </tr>
+          <tr>
+            <td>#cycle</td>
+            <td>Iterates through enumerable a given number of times.</td>
+            <td>[1, 2, 3, 4, 5].cycle { |item| print item }</td>
+            <td>#=> 1234512345</td>
+          </tr>
+          <tr>
+            <td>#count</td>
+            <td>Returns the number of times an item occurs in a given array.</td>
+            <td>[1, 2, 3, 4, 5].count(3)</td>
+            <td>#=> 1</td>
+          </tr>
+          <tr>
+            <td>#each_with_object</td>
+            <td>Accepts an object that can be used with a block.</td>
+            <td>[1, 2, 3, 4, 5].each_with_object([]) { |i, a| a << [i] }</td>
+            <td>#=> [[1], [2], [3], [4], [5]]</td>
+          </tr>
+          <tr>
+            <td>#grep</td>
+            <td>Returns an array of all items that match the pattern. <br>If optional block is supplied, items are passed to block before returning.</td>
+            <td>[1, 2, 3, 4, 5].grep(2..4) { |item| item + 1 }</td>
+            <td>#=> [3, 4, 5]</td>
+          </tr>
+          <tr>
+            <td>#partition</td>
+            <td>Returns two arrays, the first in which items evaluate to true, <br>the second in which items evaluate to false.</td>
+            <td>[1, 2, 3, 4, 5].partition { |item| item.even? }</td>
+            <td>#=> [[2, 4], [1, 3, 5]]</td>
+          </tr>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

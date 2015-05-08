@@ -1,0 +1,26 @@
+body {
+  color: white;
+  font-family: Helvetica, sans-serif;
+  background: -webkit-linear-gradient(90deg, #517fa4 10%, #243949 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #517fa4 10%, #243949 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #517fa4 10%, #243949 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #517fa4 10%, #243949 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #517fa4 10%, #243949 90%); /* W3C */
+}
+
+h1 {
+    text-align: center;
+}
+
+td {
+    border: 1px solid white;
+    padding: 1em;
+}
+
+th {
+    text-align: left;
+}
+
+tr {
+    padding: 2em;
+}
