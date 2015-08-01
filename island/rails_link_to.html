@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Mini Source Picnic
+  </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/island.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="page-title">
+        <h1 class="fz-xl fc-white outline mg-no lh-touch">
+          Mini-<br>
+          Source<br>
+          Island
+        </h1>
+        <p class="fc-white bc-black subtext">
+          A source-code getaway.
+        </p>
+      </div>
+      <div class="article-title">
+        <h1 class="ta-c fz-xl fc-white outline mg-no lh-touch"><br>
+          <span class="logo">-f- </span>
+          link_to [rails]
+        </h1>
+      </div>
+    </div>
+
+<!--     <div class="row">
+      <div class="note col span-4-t">
+        <p>
+
+        </p>
+      </div>
+      <div class="code col span-8-t">
+        <p class="source">
+
+        </p>
+        <pre>
+
+
+        </pre>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="note col span-4-t">
+        <p>
+          <strong>name -</strong> link text<br>
+          <strong>url_for -</strong> will return a url based on the options provided<br>
+          <strong>content_tag -</strong> will return the link html using:<br>
+            - an anchor tag<br>
+            - the provided link text (above), or the generated url<br>
+            - the html options (e.g. class, data), including the url
+        </p>
+      </div>
+      <div class="code col span-8-t">
+        <p class="source">rails/actionview/lib/action_view/helpers/url_helper.rb</p>
+        <pre>
+def link_to(name = nil, options = nil, html_options = nil, &block)
+  html_options, options, name = options, name, block if block_given?
+  options ||= {}
+
+  html_options = convert_options_to_data_attributes(options, html_options)
+
+  url = url_for(options)
+  html_options['href'] ||= url
+
+  content_tag(:a, name || url, html_options, &block)
+end
+        </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note col span-4-t">
+        <p>
+
+        </p>
+      </div>
+      <div class="code col span-8-t">
+        <p class="source">
+          rails/actionpack/lib/action_dispatch/routing/url_for.rb
+        </p>
+        <pre>
+def url_for(options = nil)
+  case options
+  when nil
+    _routes.url_for(url_options.symbolize_keys)
+  when Hash
+    route_name = options.delete :use_route
+    _routes.url_for(options.symbolize_keys.reverse_merge!(url_options),
+                   route_name)
+  when String
+    options
+  when Symbol
+    HelperMethodBuilder.url.handle_string_call self, options
+  when Array
+    polymorphic_url(options, options.extract_options!)
+  when Class
+    HelperMethodBuilder.url.handle_class_call self, options
+  else
+    HelperMethodBuilder.url.handle_model_call self, options
+  end
+end
+
+        </pre>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="note col span-4-t">
+        <p>
+
+        </p>
+      </div>
+      <div class="code col span-8-t">
+        <p class="source">
+          rails/actionview/lib/action_view/helpers/tag_helper.rb
+        </p>
+        <pre>
+def content_tag(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
+  if block_given?
+    options = content_or_options_with_block if content_or_options_with_block.is_a?(Hash)
+    content_tag_string(name, capture(&block), options, escape)
+  else
+    content_tag_string(name, content_or_options_with_block, options, escape)
+  end
+end
+        </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note col span-4-t">
+        <p>
+
+        </p>
+      </div>
+      <div class="code col span-8-t">
+        <p class="source">
+
+        </p>
+        <pre>
+def content_tag_string(name, content, options, escape = true)
+   tag_options = tag_options(options, escape) if options
+   content     = ERB::Util.unwrapped_html_escape(content) if escape
+   "<#{name}#{tag_options}>#{PRE_CONTENT_STRINGS[name.to_sym]}#{content}</#{name}>".html_safe
+end
+        </pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
