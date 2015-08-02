@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Mini Source Picnic
+    Mini-Source Island
   </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
     <link rel="stylesheet" type="text/css" href="../stylesheets/island.css">
@@ -22,19 +22,39 @@
       </div>
       <div class="article-title">
         <h1 class="ta-c fz-xl fc-white outline mg-no lh-touch"><br>
-          <span class="logo">-f- </span>
-          link_to [rails]
+          <!-- <span class="logo">-f- </span> -->
+          link_to [Rails]
         </h1>
       </div>
     </div>
 
+    <div class="row">
+      <div class="note">
+        <p>
+          <em>
+            <strong>link_to</strong> seems pretty nice, though it takes some big leaps. It looks like the link text is the first argument, then... an object, or a string, or a hash, or a symbol... or a ball, a sandwich... can literally anything go here? Let's find out.
+          </em>
+        </p>
+      </div>
+      <div class="code">
+        <pre class="example">
+Example:
+
+  <% @photos.each do |photo| %>
+     ...
+     <%= link_to 'View Photo', photo %>
+  <% end %>
+        </pre>
+      </div>
+    </div>
+
 <!--     <div class="row">
-      <div class="note col span-4-t">
+      <div class="note">
         <p>
 
         </p>
       </div>
-      <div class="code col span-8-t">
+      <div class="code">
         <p class="source">
 
         </p>
@@ -46,17 +66,23 @@
     </div> -->
 
     <div class="row">
-      <div class="note col span-4-t">
+      <div class="note">
         <p>
-          <strong>name -</strong> link text<br>
-          <strong>url_for -</strong> will return a url based on the options provided<br>
-          <strong>content_tag -</strong> will return the link html using:<br>
+          <strong>link_to</strong> receives the desired link text as <strong>name</strong>, along with various other options.
+        </p>
+
+        <p>
+          <strong>url_for</strong> is used to build a url from the provided <strong>options</strong>, which in this example is a photo model object.
+        </p>
+
+        <p>
+          Later, <strong>content_tag</strong> will return the html element for the link using:<br>
             - an anchor tag<br>
-            - the provided link text (above), or the generated url<br>
-            - the html options (e.g. class, data), including the url
+            - the link text as provided above, or the url, as a default<br>
+            - the html options (e.g. class, data), including the url generated above
         </p>
       </div>
-      <div class="code col span-8-t">
+      <div class="code">
         <p class="source">rails/actionview/lib/action_view/helpers/url_helper.rb</p>
         <pre>
 def link_to(name = nil, options = nil, html_options = nil, &block)
@@ -75,12 +101,20 @@ end
     </div>
 
     <div class="row">
-      <div class="note col span-4-t">
+      <div class="note">
         <p>
+          <strong>url_for</strong> is called in <strong>link_to</strong> regardless of the option type. Thus, if <strong>options</strong> is a string, it is assumed to be a url, and it is returned unchanged.
+        </p>
 
+        <p>
+          Otherwise, a url is built from the provided options. For example, if options is a model (as in the example, a common usage), <strong>handle_model_call</strong> is used to construct the url.
+        </p>
+
+        <p>
+          The controller instance (self) and the options are passed along as arguments.
         </p>
       </div>
-      <div class="code col span-8-t">
+      <div class="code">
         <p class="source">
           rails/actionpack/lib/action_dispatch/routing/url_for.rb
         </p>
@@ -105,19 +139,77 @@ def url_for(options = nil)
     HelperMethodBuilder.url.handle_model_call self, options
   end
 end
-
         </pre>
       </div>
     </div>
 
 
     <div class="row">
-      <div class="note col span-4-t">
+      <div class="note">
         <p>
+          In the example above, it would be common to see routing methods like 'photo_path(photo)' in the app's views. With the help of the subsequent three methods, <strong>handle_model_call</strong> will send a method (photo_path) to the target (the photos controller) with the photo as the argument.
+        </p>
 
+        <p>
+          <strong>handle_model</strong> constructs that 'photo_path' string, which will be sent to the controller.
+        </p>
+
+        <p>
+          <strong>model_name</strong>, called on the photo object, allows <strong>get_method_for_string</strong> to construct 'photo_path'.
+        </p>
+
+        <p>
+          These methods are being called on an instance of HelperMethodBuilder. 'path' is the suffix held as an attribute on that instance.
+        </p>
+
+        <p>
+          Upon sending the photos controller the 'photo_path' method, <strong>handle_model_call</strong> will receive a string like '/photos/< photo's id >'. It passes this back to url_for, which returns it to <strong>link_to</strong>. <strong>link_to</strong> now has a url for use in <strong>content_tag</strong>'s construction of the html element for the link.
         </p>
       </div>
-      <div class="code col span-8-t">
+      <div class="code">
+        <p class="source">
+          rails/actionpack/lib/action_dispatch/routing/polymorphic_routes.rb
+        </p>
+        <pre>
+def handle_model_call(target, model)
+  method, args = handle_model model
+  target.send(method, *args)
+end
+
+def handle_model(record)
+  args  = []
+
+  model = record.to_model
+  named_route = if model.persisted?
+                  args << model
+                  get_method_for_string model.model_name.singular_route_key
+                else
+                  get_method_for_class model
+                end
+
+  [named_route, args]
+end
+
+def get_method_for_class(klass)
+  name   = @key_strategy.call klass.model_name
+  get_method_for_string name
+end
+
+def get_method_for_string(str)
+  "#{prefix}#{str}_#{suffix}"
+end
+        </pre>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="note">
+        <p>
+          <strong>content_tag</strong> simply prepares the arguments to be sent along to <strong>content_tag_string</strong>.
+        </p>
+      </div>
+      <div class="code">
         <p class="source">
           rails/actionview/lib/action_view/helpers/tag_helper.rb
         </p>
@@ -135,12 +227,12 @@ end
     </div>
 
     <div class="row">
-      <div class="note col span-4-t">
+      <div class="note">
         <p>
-
+          <strong>content_tag_string</strong> returns an html-element string, the final result of <strong>link_to</strong>.
         </p>
       </div>
-      <div class="code col span-8-t">
+      <div class="code">
         <p class="source">
 
         </p>
@@ -150,6 +242,17 @@ def content_tag_string(name, content, options, escape = true)
    content     = ERB::Util.unwrapped_html_escape(content) if escape
    "<#{name}#{tag_options}>#{PRE_CONTENT_STRINGS[name.to_sym]}#{content}</#{name}>".html_safe
 end
+        </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note"><p></p></div>
+      <div class="code">
+        <pre class="example">
+Result:
+
+    "&lt;a href="/photos/< id >"&gt;View Photo&lt;/a&gt;"
         </pre>
       </div>
     </div>
