@@ -119,3 +119,11 @@ a {
 li {
     list-style-type: none;
 }
+
+.main-function {
+    background-color: #BADA55;
+}
+
+.sub-function {
+    background-color: #FFFF66;
+}

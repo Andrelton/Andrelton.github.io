@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Mini-Source Island
+  </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/island.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="page-title">
+        <h1 class="fz-xl fc-white outline mg-no lh-touch">
+          Mini-<br>
+          Source<br>
+          Island
+        </h1>
+        <p class="fc-white bc-black subtext">
+          A source-code getaway.
+        </p>
+      </div>
+      <div class="article-title">
+        <h1 class="ta-c fz-xl fc-white outline mg-no lh-touch"><br>
+          <!-- <span class="logo">-f- </span> -->
+          Welcome!
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note">
+        <p>
+          <em>
+            Let's explore a simple, perhaps contrived example of a change to a React component with <strong>setState</strong>, changing a boolean to reflect the display of a form.
+          </em>
+        </p>
+      </div>
+      <div class="code">
+      <pre>
+Example:
+
+  this.setState({
+    showForm: true;
+  });
+      </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note">
+        <p>
+          Many functions are called throughout the course of enqueueing and making changes to the DOM. Perhaps the easiest way of following the series of function calls will be to have a strict understanding which variable caries points to the component and which variable carries the updated state.
+        </p>
+
+        <p>
+          For the purpose of this exercise, we'll ignore the callback process and focus solely on the state.
+        </p>
+
+        <p>
+          When <strong>equeueSetState</strong> is called within <strong>setState</strong>, <strong>this</strong> is the component, and <strong>partialState</strong> is the updated state we provided. In subsequent function calls, the component will be referred to as <strong>publicInstance</strong>.
+        </p>
+
+        <p>
+          <strong>getInternal...</strong> goes out to <strong>ReactInstanceMap</strong> to retrieve the internal representation of this public-facing stateful instance.
+        </p>
+
+        <p>
+          This internal representation is already carried on the component as the property <strong>_reactInternalInstance</strong>, <strong>ReactInstanceMap</strong> simply separates the key/value pair and returns the internal instance.
+        </p>
+      </div>
+      <div class="code">
+      <p class="source">
+        https://fb.me/react-0.13.3.js
+      </p>
+      <pre>
+ReactComponent.prototype.<span class="main-function">setState</span> = function(partialState, callback) {
+  ...
+  ReactUpdateQueue.<span class="main-function">enqueueSetState</span>(this, partialState);
+    if (callback) {
+      ReactUpdateQueue.enqueueCallback(this, callback);
+    }
+  };
+};
+
+var ReactUpdateQueue = {
+  ...
+  <span class="main-function">enqueueSetState:</span> function(publicInstance, partialState) {
+    var internalInstance =
+      <span class="sub-function">getInternalInstanceReadyForUpdate</span>(
+        publicInstance, 'setState'
+      );
+    ...
+    <span>enqueueUpdate</span>(internalInstance);
+  },
+  ...
+};
+
+function <span class="sub-function">getInternalInstanceReadyForUpdate</span>(publicInstance, callerName) {
+  ...
+  var internalInstance = <span class="sub-function">ReactInstanceMap.get</span>(publicInstance);
+  ...
+  return internalInstance;
+};
+
+var ReactInstanceMap = {
+  ...
+  <span class="sub-function">get:</span> function(key) {
+    return key._reactInternalInstance;
+  },
+  ...
+};
+      </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note">
+        <p>
+
+        </p>
+      </div>
+      <div class="code">
+        <p class="source">
+
+        </p>
+        <pre>
+
+
+        </pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
