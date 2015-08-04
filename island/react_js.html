@@ -23,7 +23,7 @@
       <div class="article-title">
         <h1 class="ta-c fz-xl fc-white outline mg-no lh-touch"><br>
           <!-- <span class="logo">-f- </span> -->
-          Welcome!
+          setState [React.js]
         </h1>
       </div>
     </div>
@@ -68,6 +68,16 @@ Example:
         <p>
           This internal representation is already carried on the component as the property <strong>_reactInternalInstance</strong>, <strong>ReactInstanceMap</strong> simply separates the key/value pair and returns the internal instance.
         </p>
+
+        <p>
+          Finally, the internal representation of the component is added to a queue for a potential rerendering.
+        </p>
+
+        <p>
+          <em>
+            NOTE: Very little code has been removed. Most sections represented by elipses are error-handling messages which are not present in the minified version.
+          </em>
+        </p>
       </div>
       <div class="code">
       <p class="source">
@@ -91,7 +101,7 @@ var ReactUpdateQueue = {
         publicInstance, 'setState'
       );
     ...
-    <span>enqueueUpdate</span>(internalInstance);
+    <span class="main-function">enqueueUpdate</span>(internalInstance);
   },
   ...
 };
@@ -110,6 +120,11 @@ var ReactInstanceMap = {
   },
   ...
 };
+
+function <span class="main-function">enqueueUpdate</span>(component) {
+  ...
+  dirtyComponents.push(component);
+};
       </pre>
       </div>
     </div>
@@ -125,11 +140,71 @@ var ReactInstanceMap = {
 
         </p>
         <pre>
+var dirtyComponents = [];
+...
+function runBatchedUpdates(transaction) {
+  var len = transaction.dirtyComponentsLength;
+  ...
+  dirtyComponents.sort(mountOrderComparator);
+
+  for (var i = 0; i < len; i++) {
+    var component = dirtyComponents[i];
+    ...
+    ReactReconciler.performUpdateIfNecessary(
+      component, transaction.reconcileTransaction
+    );
+  };
+};
+
+var ReactReconciler = {
+  ...
+  performUpdateIfNecessary: function(transaction) {
+    if (this._pendingElement != null) {
+      ReactReconciler.receiveComponent(
+        this,
+        this._pendingElement || this._currentElement,
+        transaction,
+        this._context
+      );
+    }
+  },
+  ...
+  receiveComponent: function(nextElement, transaction, nextContext) {
+    var prevElement = this._currentElement;
+    var prevContext = this._context;
+
+    this._pendingElement = null;
+
+    this.updateComponent(
+      transaction,
+      prevElement,
+      nextElement,
+      prevContext,
+      nextContext
+    );
+  },
+  ...
+};
+        </pre>
+      </div>
+    </div>
+
+<!--     <div class="row">
+      <div class="note">
+        <p>
+
+        </p>
+      </div>
+      <div class="code">
+        <p class="source">
+
+        </p>
+        <pre>
 
 
         </pre>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </body>
