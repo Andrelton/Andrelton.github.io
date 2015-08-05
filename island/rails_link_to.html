@@ -35,6 +35,11 @@
             <strong>link_to</strong> seems pretty nice, though it takes some big leaps. It looks like the link text is the first argument, then... an object, or a string, or a hash, or a symbol... or a ball, a sandwich... can literally anything go here? Let's find out.
           </em>
         </p>
+        <p class="ta-c">
+          <em>
+            Eric Saxman | 'Andrelton' - 2015.<br>Find me on <a href="https://github.com/Andrelton">GitHub</a> | <a href="https://www.linkedin.com/in/ericsaxman">LinkedIn</a>.
+          </em>
+        </p>
       </div>
       <div class="code">
         <pre class="example">
@@ -45,6 +50,7 @@ Example:
      <%= link_to 'View Photo', photo %>
   <% end %>
         </pre>
+
       </div>
     </div>
 
@@ -85,16 +91,16 @@ Example:
       <div class="code">
         <p class="source">rails/actionview/lib/action_view/helpers/url_helper.rb</p>
         <pre>
-def link_to(name = nil, options = nil, html_options = nil, &block)
+def <span class="main-function">link_to</span>(name = nil, options = nil, html_options = nil, &block)
   html_options, options, name = options, name, block if block_given?
   options ||= {}
 
   html_options = convert_options_to_data_attributes(options, html_options)
 
-  url = url_for(options)
+  url = <span class="main-function">url_for</span>(options)
   html_options['href'] ||= url
 
-  content_tag(:a, name || url, html_options, &block)
+  <span class="main-function">content_tag</span>(:a, name || url, html_options, &block)
 end
         </pre>
       </div>
@@ -119,7 +125,7 @@ end
           rails/actionpack/lib/action_dispatch/routing/url_for.rb
         </p>
         <pre>
-def url_for(options = nil)
+def <span class="main-function">url_for</span>(options = nil)
   case options
   when nil
     _routes.url_for(url_options.symbolize_keys)
@@ -136,7 +142,7 @@ def url_for(options = nil)
   when Class
     HelperMethodBuilder.url.handle_class_call self, options
   else
-    HelperMethodBuilder.url.handle_model_call self, options
+    HelperMethodBuilder.url.<span class="sub-function">handle_model_call</span> self, options
   end
 end
         </pre>
@@ -171,12 +177,12 @@ end
           rails/actionpack/lib/action_dispatch/routing/polymorphic_routes.rb
         </p>
         <pre>
-def handle_model_call(target, model)
-  method, args = handle_model model
+def <span class="sub-function">handle_model_call</span>(target, model)
+  method, args = <span class="sub-function">handle_model</span> model
   target.send(method, *args)
 end
 
-def handle_model(record)
+def <span class="sub-function">handle_model</span>(record)
   args  = []
 
   model = record.to_model
@@ -184,18 +190,18 @@ def handle_model(record)
                   args << model
                   get_method_for_string model.model_name.singular_route_key
                 else
-                  get_method_for_class model
+                  <span class="sub-function">get_method_for_class</span> model
                 end
 
   [named_route, args]
 end
 
-def get_method_for_class(klass)
+def <span class="sub-function">get_method_for_class</span>(klass)
   name   = @key_strategy.call klass.model_name
-  get_method_for_string name
+  <span class="sub-function">get_method_for_string</span> name
 end
 
-def get_method_for_string(str)
+def <span class="sub-function">get_method_for_string</span>(str)
   "#{prefix}#{str}_#{suffix}"
 end
         </pre>
@@ -214,12 +220,12 @@ end
           rails/actionview/lib/action_view/helpers/tag_helper.rb
         </p>
         <pre>
-def content_tag(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
+def <span class="main-function">content_tag</span>(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
   if block_given?
     options = content_or_options_with_block if content_or_options_with_block.is_a?(Hash)
     content_tag_string(name, capture(&block), options, escape)
   else
-    content_tag_string(name, content_or_options_with_block, options, escape)
+    <span class="sub-function">content_tag_string</span>(name, content_or_options_with_block, options, escape)
   end
 end
         </pre>
@@ -237,7 +243,7 @@ end
 
         </p>
         <pre>
-def content_tag_string(name, content, options, escape = true)
+def <span class="sub-function">content_tag_string</span>(name, content, options, escape = true)
    tag_options = tag_options(options, escape) if options
    content     = ERB::Util.unwrapped_html_escape(content) if escape
    "<#{name}#{tag_options}>#{PRE_CONTENT_STRINGS[name.to_sym]}#{content}</#{name}>".html_safe

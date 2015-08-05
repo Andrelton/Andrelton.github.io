@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Mini-Source Island
+  </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/island.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="page-title">
+        <h1 class="fz-xl fc-white outline mg-no lh-touch">
+          Mini-<br>
+          Source<br>
+          Island
+        </h1>
+        <p class="fc-white bc-black subtext">
+          A source-code getaway.
+        </p>
+      </div>
+      <div class="article-title">
+        <h1 class="ta-c fz-xl fc-white outline mg-no lh-touch"><br>
+          <!-- <span class="logo">-f- </span> -->
+          .text() [jQuery]
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note">
+        <p>
+          <em>
+            Let's take a look at a straightforward jQuery method, <strong>.text().</strong>
+          </em>
+        </p>
+        <p class="ta-c">
+          <em>
+            Eric Saxman | 'Andrelton' - 2015.<br>Find me on <a href="https://github.com/Andrelton">GitHub</a> | <a href="https://www.linkedin.com/in/ericsaxman">LinkedIn</a>.
+          </em>
+        </p>
+      </div>
+      <div class="code">
+        <pre class="example">
+Example:
+
+  var headerText = $('h1').text();
+        </pre>
+      </div>
+    </div>
+
+<!--     <div class="row">
+      <div class="note">
+        <p>
+
+        </p>
+      </div>
+      <div class="code">
+        <p class="source">
+
+        </p>
+        <pre>
+
+
+        </pre>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="note">
+        <p>
+          If called with no arguments, as above, <strong>.text()</strong> simply returns the text of each element. To do this, it uses the .text() method on the local copy of jQuery, which references Sizzle's <strong>.getText()</strong>.
+        </p>
+
+        <p>
+          If a new text string is provided, it sets the <strong>textContent</strong> of each node to that string.
+        </p>
+      </div>
+      <div class="code">
+        <p class="source">https://code.jquery.com/jquery-2.1.4.js</p>
+        <pre>
+jQuery.fn.extend({
+  <span class="main-function">text:</span> function( value ) {
+    return access( this, function( value ) {
+      return value === undefined ?
+        <span class="sub-function">jQuery.text</span>( this ) :
+        this.empty().each(function() {
+          if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
+            this.textContent = value;
+          }
+        });
+    }, null, value, arguments.length );
+  },
+...</pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="note">
+        <p>
+          Sizzle.js is a CSS selector library. It was developed as a part of jQuery, but it is designed to be easily used by other host libraries. It was substantially re-written many years after jQuery was originally released, and it competes well with other selector engines. It is included in-line in the jQuery library.
+        </p>
+
+        <p>
+          The jQuery method uses Sizzle's .getText() to get text from DOM nodes. The function flow is fairly straightforward, though it references a native DOM property that few developers may have encountered, <strong>nodeType</strong>.
+        </p>
+
+        <p>
+          If the <strong>elem</strong> argument is anything other that a single DOM node, getText builds up a string of text in the <strong>ret</strong> variable. If <strong>elem</strong>'s node type is 'undefined', it is assumed to be an array of elements. getText is called for each element, and its text is added to <strong>ret</strong>.
+        </p>
+
+        <p>
+          If the node is an Element, Document, or DocumentFragment (this is where the nodeType number comes into play), getText returns the value in the <strong>.textContent</strong> property. If it is a literal text node (or the deprecated 'CDATASection' node...), the <strong>nodeValue</strong> is returned.
+        </p>
+      </div>
+      <div class="code">
+        <pre>
+<span class="sub-function">jQuery.text</span> = <span class="sub-function">Sizzle.getText</span>;
+...
+
+getText = <span class="sub-function">Sizzle.getText</span> = function( elem ) {
+  var node,
+    ret = "",
+    i = 0,
+    nodeType = elem.nodeType;
+
+  if ( !nodeType ) {
+    // If no nodeType, this is expected to be an array
+    while ( (node = elem[i++]) ) {
+      ret += getText( node );
+    }
+
+  } else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+
+    if ( typeof elem.textContent === "string" ) {
+      return elem.textContent;
+    } else {
+      // Traverse its children
+      for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+        ret += getText( elem );
+      }
+    }
+
+  } else if ( nodeType === 3 || nodeType === 4 ) {
+    return elem.nodeValue;
+  }
+
+  return ret;
+};
+        </pre>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+</html>
